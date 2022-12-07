@@ -1,0 +1,7 @@
+FROM maven:3.8.6-openjdk-8-slim AS build
+RUN mkdir /home/app
+copy . /home/app
+RUN cd /home/app && mvn package
+RUN cp /home/app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]
